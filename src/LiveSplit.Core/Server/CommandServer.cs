@@ -506,6 +506,17 @@ public class CommandServer
                 response = "pong";
                 break;
             }
+            case "getallsplittimes":
+            {
+                var splitTimes = State.Run.Select(split => TimeFormatter.Format(split.SplitTime[State.CurrentTimingMethod])).ToArray();
+                response = string.Join(",", splitTimes);
+                break;
+            }
+            case "getruncategory":
+            {
+                response = State.Run.CategoryName;
+                break;
+            }
             default:
             {
                 Log.Error($"[Server] Invalid command: {message}");
